@@ -1,4 +1,7 @@
-app.on('pull_request.opened', async (context) => {
+const { Probot } = require('probot');
+
+module.exports = (app) => {
+  app.on('pull_request.opened', async (context) => {
     const { number } = context.payload.pull_request;
     const deployUrl = `http://{your-server-ip/domain}/pr-${number}`;
   
@@ -26,4 +29,4 @@ app.on('pull_request.opened', async (context) => {
     });
     await context.octokit.issues.createComment(comment);
   });
-  
+};
